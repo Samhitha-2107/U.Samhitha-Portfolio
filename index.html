@@ -1,102 +1,463 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Uppala Samhitha - Portfolio</title>
-  <link rel="stylesheet" href="styles.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Uppala Samhitha — Software Development Engineer</title>
+<meta name="description" content="Portfolio of Uppala Samhitha, Software Development Engineer. Python, Java, ML, and full-stack projects.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#12141c;
+    --ink-2:#191c26;
+    --ink-3:#20232f;
+    --paper:#edecea;
+    --paper-dim:#9a9ba8;
+    --amber:#e8a33d;
+    --amber-dim:#8a6a35;
+    --green:#5fbe8a;
+    --line:#2b2e3b;
+    --serif:'Fraunces',serif;
+    --mono:'IBM Plex Mono',monospace;
+    --sans:'Inter',sans-serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--ink);
+    color:var(--paper);
+    font-family:var(--sans);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit;text-decoration:none;}
+  img{max-width:100%;display:block;}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 32px;}
+  @media (max-width:640px){.wrap{padding:0 20px;}}
+
+  ::selection{background:var(--amber);color:var(--ink);}
+
+  /* ---------- NAV ---------- */
+  header{
+    position:sticky;top:0;z-index:100;
+    background:rgba(18,20,28,0.88);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  nav.wrap{
+    display:flex;align-items:center;justify-content:space-between;
+    height:68px;
+  }
+  .logo{
+    font-family:var(--mono);font-size:14px;font-weight:600;
+    letter-spacing:0.02em;color:var(--paper);
+  }
+  .logo span{color:var(--amber);}
+  .navlinks{display:flex;gap:32px;font-family:var(--mono);font-size:13px;letter-spacing:0.03em;}
+  .navlinks a{color:var(--paper-dim);transition:color .2s;position:relative;}
+  .navlinks a:hover{color:var(--paper);}
+  .navlinks a::before{content:'./';color:var(--amber-dim);}
+  .navlinks .resume-nav{
+    color:var(--ink);background:var(--amber);padding:8px 14px;border-radius:3px;
+  }
+  .navlinks .resume-nav::before{content:'';}
+  .navlinks .resume-nav:hover{background:#f0b559;color:var(--ink);}
+  .navtoggle{display:none;background:none;border:1px solid var(--line);color:var(--paper);
+    font-family:var(--mono);padding:6px 10px;border-radius:3px;font-size:13px;}
+  @media (max-width:800px){
+    .navlinks{display:none;position:absolute;top:68px;left:0;right:0;background:var(--ink-2);
+      flex-direction:column;gap:0;border-bottom:1px solid var(--line);}
+    .navlinks.open{display:flex;}
+    .navlinks a{padding:14px 20px;border-bottom:1px solid var(--line);}
+    .navlinks .resume-nav{margin:14px 20px;text-align:center;}
+    .navtoggle{display:block;}
+  }
+
+  /* ---------- HERO ---------- */
+  .hero{padding:88px 0 72px;position:relative;}
+  .status-line{
+    display:inline-flex;align-items:center;gap:8px;
+    font-family:var(--mono);font-size:12px;color:var(--green);
+    border:1px solid rgba(95,190,138,.35);background:rgba(95,190,138,.08);
+    padding:6px 12px;border-radius:20px;margin-bottom:28px;
+  }
+  .status-dot{width:7px;height:7px;border-radius:50%;background:var(--green);
+    box-shadow:0 0 0 0 rgba(95,190,138,.6);animation:pulse 2s infinite;}
+  @keyframes pulse{
+    0%{box-shadow:0 0 0 0 rgba(95,190,138,.5);}
+    70%{box-shadow:0 0 0 8px rgba(95,190,138,0);}
+    100%{box-shadow:0 0 0 0 rgba(95,190,138,0);}
+  }
+  .hero-grid{display:grid;grid-template-columns:1.3fr 0.7fr;gap:48px;align-items:center;}
+  @media (max-width:800px){.hero-grid{grid-template-columns:1fr;gap:36px;}}
+  .eyebrow{font-family:var(--mono);font-size:13px;color:var(--amber);letter-spacing:.08em;
+    text-transform:uppercase;margin-bottom:14px;}
+  h1.name{
+    font-family:var(--serif);font-weight:600;font-size:clamp(40px,6vw,64px);
+    line-height:1.02;letter-spacing:-0.01em;margin-bottom:18px;
+  }
+  .tagline{font-size:18px;color:var(--paper-dim);max-width:52ch;margin-bottom:32px;}
+  .tagline b{color:var(--paper);font-weight:600;}
+  .cta-row{display:flex;gap:14px;flex-wrap:wrap;}
+  .btn{
+    font-family:var(--mono);font-size:13px;font-weight:500;padding:13px 22px;
+    border-radius:3px;display:inline-flex;align-items:center;gap:8px;
+    transition:transform .15s, background .15s;
+  }
+  .btn:hover{transform:translateY(-2px);}
+  .btn-primary{background:var(--amber);color:var(--ink);}
+  .btn-primary:hover{background:#f0b559;}
+  .btn-ghost{border:1px solid var(--line);color:var(--paper);}
+  .btn-ghost:hover{border-color:var(--paper-dim);}
+
+  .portrait-frame{
+    position:relative;border:1px solid var(--line);border-radius:6px;overflow:hidden;
+    background:var(--ink-2);
+  }
+  .portrait-frame img{width:100%;aspect-ratio:4/5;object-fit:cover;filter:grayscale(15%);}
+  .frame-tag{
+    position:absolute;bottom:0;left:0;right:0;background:rgba(18,20,28,.85);
+    backdrop-filter:blur(4px);padding:10px 14px;font-family:var(--mono);
+    font-size:11px;color:var(--paper-dim);border-top:1px solid var(--line);
+  }
+
+  /* ---------- SECTION LABELS ---------- */
+  section{padding:76px 0;border-top:1px solid var(--line);}
+  .sec-head{display:flex;align-items:baseline;gap:14px;margin-bottom:42px;}
+  .sec-num{font-family:var(--mono);font-size:13px;color:var(--amber-dim);}
+  h2{font-family:var(--serif);font-size:clamp(26px,3vw,34px);font-weight:600;}
+
+  /* ---------- ABOUT ---------- */
+  .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px;}
+  @media (max-width:800px){.about-grid{grid-template-columns:1fr;gap:32px;}}
+  .about-text p{color:var(--paper-dim);margin-bottom:16px;font-size:15.5px;max-width:56ch;}
+  .about-text p b{color:var(--paper);}
+  .facts{border:1px solid var(--line);border-radius:6px;padding:24px;background:var(--ink-2);}
+  .fact-row{display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--line);
+    font-size:14px;}
+  .fact-row:last-child{border-bottom:none;}
+  .fact-label{font-family:var(--mono);color:var(--paper-dim);font-size:12px;text-transform:uppercase;letter-spacing:.04em;}
+  .fact-value{color:var(--paper);font-weight:500;text-align:right;}
+  .edit-note{font-family:var(--mono);font-size:11px;color:var(--amber-dim);margin-top:14px;}
+
+  /* ---------- PROJECTS ---------- */
+  .project{
+    display:grid;grid-template-columns:0.9fr 1.1fr;gap:36px;
+    border:1px solid var(--line);border-radius:8px;overflow:hidden;background:var(--ink-2);
+    margin-bottom:28px;
+  }
+  @media (max-width:800px){.project{grid-template-columns:1fr;}}
+  .project-media{position:relative;background:var(--ink-3);min-height:220px;}
+  .project-media img{width:100%;height:100%;object-fit:cover;min-height:220px;}
+  .project-body{padding:28px 30px;display:flex;flex-direction:column;}
+  .project-index{font-family:var(--mono);font-size:12px;color:var(--amber-dim);margin-bottom:10px;}
+  .project-title{font-family:var(--serif);font-size:24px;font-weight:600;margin-bottom:12px;}
+  .project-desc{color:var(--paper-dim);font-size:14.5px;margin-bottom:16px;}
+  .project-desc b{color:var(--paper);}
+  .stack-row{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px;}
+  .tag{font-family:var(--mono);font-size:11px;color:var(--paper);
+    border:1px solid var(--line);padding:5px 10px;border-radius:3px;background:var(--ink);}
+  .project-links{display:flex;gap:14px;margin-top:auto;font-family:var(--mono);font-size:12.5px;}
+  .project-links a{color:var(--amber);border-bottom:1px solid transparent;}
+  .project-links a:hover{border-bottom:1px solid var(--amber);}
+  .project-links .disabled{color:var(--paper-dim);cursor:default;}
+  .project-links .disabled:hover{border-bottom:none;}
+
+  /* ---------- SKILLS ---------- */
+  .skills-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:28px;}
+  @media (max-width:700px){.skills-grid{grid-template-columns:1fr;}}
+  .skill-cat{border:1px solid var(--line);border-radius:6px;padding:22px 24px;background:var(--ink-2);}
+  .skill-cat h3{font-family:var(--mono);font-size:12px;text-transform:uppercase;letter-spacing:.06em;
+    color:var(--amber);margin-bottom:16px;}
+  .skill-list{display:flex;flex-wrap:wrap;gap:8px;}
+  .skill-pill{font-family:var(--mono);font-size:12.5px;padding:6px 12px;border-radius:20px;
+    border:1px solid var(--line);color:var(--paper);}
+
+  /* ---------- ACHIEVEMENTS ---------- */
+  .achieve-list{display:flex;flex-direction:column;gap:0;border:1px solid var(--line);border-radius:6px;overflow:hidden;}
+  .achieve-item{display:grid;grid-template-columns:120px 1fr;gap:20px;padding:18px 24px;
+    border-bottom:1px solid var(--line);background:var(--ink-2);}
+  .achieve-item:last-child{border-bottom:none;}
+  .achieve-tag{font-family:var(--mono);font-size:11px;color:var(--amber);align-self:start;padding-top:2px;}
+  .achieve-text b{color:var(--paper);}
+  .achieve-text{color:var(--paper-dim);font-size:14.5px;}
+  @media (max-width:600px){.achieve-item{grid-template-columns:1fr;gap:6px;}}
+
+  /* ---------- CONTACT ---------- */
+  .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:start;}
+  @media (max-width:800px){.contact-grid{grid-template-columns:1fr;}}
+  .contact-text p{color:var(--paper-dim);max-width:48ch;margin-bottom:24px;}
+  .contact-list{display:flex;flex-direction:column;gap:14px;}
+  .contact-row{display:flex;align-items:center;gap:14px;font-family:var(--mono);font-size:14px;
+    border:1px solid var(--line);padding:14px 18px;border-radius:6px;background:var(--ink-2);transition:border-color .2s;}
+  .contact-row:hover{border-color:var(--amber-dim);}
+  .contact-icon{width:20px;height:20px;flex-shrink:0;color:var(--amber);}
+  .contact-icon svg{width:100%;height:100%;}
+
+  footer{border-top:1px solid var(--line);padding:32px 0;font-family:var(--mono);
+    font-size:12px;color:var(--paper-dim);display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;}
+</style>
 </head>
 <body>
-  <!-- Sidebar -->
-  <aside class="sidebar">
-    <div>
-      <h1>UPPALA<br><span class="highlight">SAMHITHA</span></h1>
-      <nav class="nav-links">
-        <a href="#home">Home</a>
-        <a href="#about">About</a>
-        <a href="#projects">Projects</a>
-        <a href="#skills">Skills</a>
-        <a href="#contact">Contact</a>
-      </nav>
+
+<header>
+  <nav class="wrap">
+    <div class="logo">US<span>_</span>portfolio</div>
+    <button class="navtoggle" id="navToggle">menu</button>
+    <div class="navlinks" id="navLinks">
+      <a href="#about">about</a>
+      <a href="#experience">experience</a>
+      <a href="#projects">projects</a>
+      <a href="#skills">skills</a>
+      <a href="#achievements">achievements</a>
+      <a href="#contact">contact</a>
+      <a href="resume.pdf" class="resume-nav" target="_blank" rel="noopener">Resume ↓</a>
     </div>
-    <div class="social-icons">
-      <a href="#"><i class="fab fa-facebook-f"></i></a>
-      <a href="#"><i class="fab fa-instagram"></i></a>
-      
-      <a href="https://www.linkedin.com/in/uppala-samhitha-8a060728a"><i class="fab fa-linkedin-in"></i></a>
+  </nav>
+</header>
+
+<main>
+  <!-- ================= HERO ================= -->
+  <section class="hero" style="border-top:none;">
+    <div class="wrap hero-grid">
+      <div>
+        <div class="status-line"><span class="status-dot"></span>B.Tech CS (AI), VIT Chennai — Class of 2027</div>
+        <div class="eyebrow">Software Development Engineer</div>
+        <h1 class="name">Uppala Samhitha</h1>
+        <p class="tagline">I build <b>AI-driven and scalable software</b> — from Vision Transformer pipelines to multi-agent AI systems — using Python, Java, and modern web tooling. Machine Learning Intern at Coincent.ai, currently open to SDE internships and full-time roles.</p>
+        <div class="cta-row">
+          <a href="resume.pdf" class="btn btn-primary" target="_blank" rel="noopener">Download Résumé</a>
+          <a href="#projects" class="btn btn-ghost">View Projects</a>
+          <a href="#contact" class="btn btn-ghost">Contact Me</a>
+        </div>
+      </div>
+      <div class="portrait-frame">
+        <img src="https://samhitha-2107.github.io/U.Samhitha-Portfolio/profile.png" alt="Uppala Samhitha">
+        <div class="frame-tag">Vellore, Tamil Nadu, IN</div>
+      </div>
     </div>
-  </aside>
+  </section>
 
-  <!-- Main content -->
-  <main class="main">
-    <section id="home" class="hero">
-      <div class="hero-text">
-        
-        <h2>I AM <span class="highlight">UPPALA SAMHITHA</span></h2>
-        <h3>Software Development Engineer</h3>
-        <p>
-          Results-driven Software Engineer with a passion for building efficient,
-          AI-driven, and scalable solutions using Python, Java, and modern web technologies.
-        </p>
-        <a href="#about" class="btn">About Me</a>
+  <!-- ================= ABOUT ================= -->
+  <section id="about">
+    <div class="wrap">
+      <div class="sec-head"><span class="sec-num">01</span><h2>About</h2></div>
+      <div class="about-grid">
+        <div class="about-text">
+          <p>I'm a <b>B.Tech Computer Science (AI specialization)</b> student at VIT Chennai, and a Machine Learning Intern at Coincent.ai, where I've worked on object detection and Vision Transformer models. I like building things end-to-end — from training a CNN to shipping the web app around it.</p>
+          <p>My work spans <b>computer vision, agentic AI systems, and full-stack development</b>. I'm looking for SDE internship / full-time roles where I can keep building production-grade ML and software systems.</p>
+        </div>
+        <div class="facts">
+          <div class="fact-row"><span class="fact-label">Education</span><span class="fact-value">VIT Chennai, B.Tech CS (AI)</span></div>
+          <div class="fact-row"><span class="fact-label">CGPA</span><span class="fact-value">8.71 / 10</span></div>
+          <div class="fact-row"><span class="fact-label">Graduation</span><span class="fact-value">2027</span></div>
+          <div class="fact-row"><span class="fact-label">Class XII</span><span class="fact-value">96% — Narayana Jr. College</span></div>
+          <div class="fact-row"><span class="fact-label">Class X</span><span class="fact-value">CGPA 10 — Gowtham Model School</span></div>
+          <div class="fact-row"><span class="fact-label">Focus</span><span class="fact-value">AI / Full-Stack / DSA</span></div>
+        </div>
       </div>
-      <img src="profile.png" alt="Profile photo" class="profile-img">
-    </section>
+    </div>
+  </section>
 
-    <section id="projects">
-      <h2 class="section-title">Projects</h2>
-      <div class="projects">
-        <div class="project">
-          <img src="Nutrition.png" alt="Project 1">
-          <div>
-            <h3>AI Powered Nutrition Analyzer</h3>
-            <p>Developed an AI system to identify food images and estimate nutritional content using MobileNetV2 and VGG16.</p>
+  <!-- ================= EXPERIENCE ================= -->
+  <section id="experience">
+    <div class="wrap">
+      <div class="sec-head"><span class="sec-num">02</span><h2>Experience</h2></div>
+      <div class="achieve-list">
+        <div class="achieve-item" style="grid-template-columns:180px 1fr;">
+          <div class="achieve-tag" style="color:var(--paper);">
+            <div style="color:var(--amber);font-size:12px;">Jul – Aug 2025</div>
+            <div style="margin-top:4px;">Coincent.ai</div>
           </div>
-        </div>
-        <div class="project">
-          <img src="travel_planner.png" alt="Project 2">
-          <div>
-            <h3>Agentic AI Travel Planner </h3>
-            <p>Built an Agentic AI system to create personalized travel itineraries based on user preferences and real-time data.</p>
-          </div>
-        </div>
-        <div class="project">
-          <img src="RoadGuardian.png" alt="Project 3">
-          <div>
-            <h3>RoadGuardian</h3>
-            <p>Developed a real-time civic hazard reporting platform enabling citizens to report issues and track resolution with transparency.</p>
+          <div class="achieve-text">
+            <b style="font-size:16px;display:block;margin-bottom:8px;">Machine Learning Intern</b>
+            Worked on an <b>object detection</b> project using TensorFlow to identify and classify objects from images, improving automated visual recognition capabilities. Developed a <b>Vision Transformer (ViT)</b> model for image classification, applying transformer-based architecture to improve visual pattern recognition performance.
           </div>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <section id="skills">
-      <h2 class="section-title">Skills</h2>
-      <div class="skills-grid">    
-        <div class="skill">Java</div>
-        <div class="skill">HTML</div>
-        <div class="skill">CSS</div>
-        <div class="skill">JavaScript</div>
-        <div class="skill">Machine Learning</div>
-        <div class="skill">Artificial Intelligence</div>
-        <div class="skill">Data Structures & Algorithms</div>
+  <!-- ================= PROJECTS ================= -->
+  <section id="projects">
+    <div class="wrap">
+      <div class="sec-head"><span class="sec-num">03</span><h2>Projects</h2></div>
+
+      <div class="project">
+        <div class="project-media">
+          <img src="https://samhitha-2107.github.io/U.Samhitha-Portfolio/Nutrition.png" alt="AI Powered Nutrition Analyzer">
+        </div>
+        <div class="project-body">
+          <div class="project-index">project / 01</div>
+          <div class="project-title">AI-Powered Nutrition Analyzer</div>
+          <p class="project-desc">Built an AI-based nutrition analyzer for fitness enthusiasts that identifies food items from images and estimates nutritional content, enabling <b>automated diet tracking</b>. Used <b>MobileNetV2 and VGG16</b> with transfer learning, along with data preprocessing and model optimization techniques to improve recognition accuracy.</p>
+          <div class="stack-row">
+            <span class="tag">Python</span><span class="tag">TensorFlow/Keras</span><span class="tag">MobileNetV2</span><span class="tag">VGG16</span><span class="tag">Transfer Learning</span>
+          </div>
+          <div class="project-links">
+            <span class="disabled">GitHub — coming soon</span>
+            <span class="disabled">Live Demo — coming soon</span>
+          </div>
+        </div>
       </div>
-    </section>
 
-    <section id="contact" class="contact">
-      <h2 class="section-title">Contact</h2>
-      <p>Email: <a href="mailto:uppalasamhitha21@gmail.com">uppalasamhitha21@gmail.com</a></p>
-      <p>Phone: <a href="tel:+919014206623">+91 90142 06623</a></p>
-      <p>LinkedIn: <a href="https://www.linkedin.com/in/uppala-samhitha-8a060728a">View Profile</a></p>
-    </section>
+      <div class="project">
+        <div class="project-media">
+          <img src="https://samhitha-2107.github.io/U.Samhitha-Portfolio/travel_planner.png" alt="Agentic AI Travel Planner">
+        </div>
+        <div class="project-body">
+          <div class="project-index">project / 02</div>
+          <div class="project-title">Agentic AI Travel Planner</div>
+          <p class="project-desc">Built with <b>LangGraph and Streamlit</b>, orchestrating multiple AI agents for itinerary generation, weather analysis, attraction discovery, and budget planning — with persistent user memory across sessions. Integrated <b>Geoapify and OpenWeather APIs</b> for live hotel, restaurant, and attraction recommendations with Google Maps links, plus a smart budget-allocation system based on destination and preferences.</p>
+          <div class="stack-row">
+            <span class="tag">Python</span><span class="tag">LangGraph</span><span class="tag">Streamlit</span><span class="tag">Multi-Agent AI</span><span class="tag">Geoapify API</span><span class="tag">OpenWeather API</span>
+          </div>
+          <div class="project-links">
+            <span class="disabled">GitHub — coming soon</span>
+            <span class="disabled">Live Demo — coming soon</span>
+          </div>
+        </div>
+      </div>
 
-    <footer>
-      © <span id="year"></span> Uppala Samhitha
-    </footer>
-  </main>
+      <div class="project">
+        <div class="project-media">
+          <img src="https://samhitha-2107.github.io/U.Samhitha-Portfolio/RoadGuardian.png" alt="RoadGuardian">
+        </div>
+        <div class="project-body">
+          <div class="project-index">project / 03</div>
+          <div class="project-title">RoadGuardian</div>
+          <p class="project-desc">A web-based civic hazard-reporting platform, built with <b>HTML, CSS, JS, and Node.js</b>, that lets citizens upload road-issue images and track complaint status in real time. Implemented the <b>backend complaint-management and status-update system</b> in Node.js, improving transparency between citizens and municipal authorities.</p>
+          <div class="stack-row">
+            <span class="tag">Node.js</span><span class="tag">JavaScript</span><span class="tag">HTML/CSS</span><span class="tag">Backend</span><span class="tag">Full-Stack</span>
+          </div>
+          <div class="project-links">
+            <span class="disabled">GitHub — coming soon</span>
+            <span class="disabled">Live Demo — coming soon</span>
+          </div>
+        </div>
+      </div>
 
-  <script src="script.js"></script>
+    </div>
+  </section>
+
+  <!-- ================= SKILLS ================= -->
+  <section id="skills">
+    <div class="wrap">
+      <div class="sec-head"><span class="sec-num">04</span><h2>Skills</h2></div>
+      <div class="skills-grid">
+        <div class="skill-cat">
+          <h3>Languages &amp; Frameworks</h3>
+          <div class="skill-list">
+            <span class="skill-pill">C</span>
+            <span class="skill-pill">Java</span>
+            <span class="skill-pill">Python</span>
+            <span class="skill-pill">JavaScript</span>
+            <span class="skill-pill">Node.js</span>
+            <span class="skill-pill">HTML5</span>
+            <span class="skill-pill">CSS3</span>
+          </div>
+        </div>
+        <div class="skill-cat">
+          <h3>AI / ML</h3>
+          <div class="skill-list">
+            <span class="skill-pill">Machine Learning</span>
+            <span class="skill-pill">Deep Learning</span>
+            <span class="skill-pill">Computer Vision</span>
+            <span class="skill-pill">Vision Transformers</span>
+            <span class="skill-pill">LangGraph / Agentic AI</span>
+          </div>
+        </div>
+        <div class="skill-cat">
+          <h3>CS Fundamentals</h3>
+          <div class="skill-list">
+            <span class="skill-pill">Data Structures</span>
+            <span class="skill-pill">Algorithms</span>
+            <span class="skill-pill">OOP</span>
+          </div>
+        </div>
+        <div class="skill-cat">
+          <h3>Tools &amp; Platforms</h3>
+          <div class="skill-list">
+            <span class="skill-pill">Git / GitHub</span>
+            <span class="skill-pill">Streamlit</span>
+            <span class="skill-pill">REST APIs</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= ACHIEVEMENTS ================= -->
+  <section id="achievements">
+    <div class="wrap">
+      <div class="sec-head"><span class="sec-num">05</span><h2>Achievements &amp; Certifications</h2></div>
+      <div class="achieve-list">
+        <div class="achieve-item">
+          <div class="achieve-tag">CERT</div>
+          <div class="achieve-text"><b>Artificial Intelligence with Python</b> — training program conducted by Coincent. <a href="https://drive.google.com/file/d/1QSX7PM5gyLA3VqLsJpIaOTivS6oQKRhv/view?usp=drive_link" target="_blank" rel="noopener" style="color:var(--amber);border-bottom:1px solid var(--amber-dim);">View Certificate ↗</a></div>
+        </div>
+        <div class="achieve-item">
+          <div class="achieve-tag">CERT</div>
+          <div class="achieve-text"><b>Industry Training Program</b> — conducted by SmartBridge, focused on industry-oriented technical skills and project-based learning. <a href="https://drive.google.com/file/d/1ACjq7tyViyMQdkyZF3TQ_omwHWyH5KPW/view?usp=drive_link" target="_blank" rel="noopener" style="color:var(--amber);border-bottom:1px solid var(--amber-dim);">View Certificate ↗</a></div>
+        </div>
+        <div class="achieve-item">
+          <div class="achieve-tag">CERT</div>
+          <div class="achieve-text"><b>Project-Based Program Certification</b> — SmartBridge, demonstrating practical application of technical skills through hands-on development. <a href="https://drive.google.com/file/d/1qnvYO6-R9cpixbbT1nL36G1u9WGMKsGe/view?usp=drive_link" target="_blank" rel="noopener" style="color:var(--amber);border-bottom:1px solid var(--amber-dim);">View Certificate ↗</a></div>
+        </div>
+        <div class="achieve-item">
+          <div class="achieve-tag">DSA</div>
+          <div class="achieve-text"><b>GeeksforGeeks</b> — solved data structures and algorithm problems to build logical thinking and coding efficiency. <a href="https://www.geeksforgeeks.org/profile/uppalasameioj" target="_blank" rel="noopener" style="color:var(--amber);border-bottom:1px solid var(--amber-dim);">View Profile ↗</a></div>
+        </div>
+        <div class="achieve-item">
+          <div class="achieve-tag">DSA</div>
+          <div class="achieve-text"><b>LeetCode</b> — solved data structures and algorithm problems to strengthen problem-solving skills. <a href="https://leetcode.com/u/uppalasamhitha21/" target="_blank" rel="noopener" style="color:var(--amber);border-bottom:1px solid var(--amber-dim);">View Profile ↗</a></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= CONTACT ================= -->
+  <section id="contact">
+    <div class="wrap contact-grid">
+      <div class="contact-text">
+        <div class="sec-head" style="margin-bottom:18px;"><span class="sec-num">06</span><h2>Contact</h2></div>
+        <p>Actively looking for Software Development Engineer roles. Feel free to reach out for opportunities, collaborations, or just to talk tech.</p>
+      </div>
+      <div class="contact-list">
+        <a href="mailto:uppalasamhitha21@gmail.com" class="contact-row">
+          <span class="contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 6h18v12H3z"/><path d="M3 6l9 7 9-7"/></svg></span>
+          uppalasamhitha21@gmail.com
+        </a>
+        <a href="tel:+919014206623" class="contact-row">
+          <span class="contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.3 1.8.6 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.5c.9.3 1.8.5 2.7.6a2 2 0 0 1 1.9 2Z"/></svg></span>
+          +91 90142 06623
+        </a>
+        <a href="https://www.linkedin.com/in/uppala-samhitha-8a060728a" target="_blank" rel="noopener" class="contact-row">
+          <span class="contact-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5C4.98 4.88 3.87 6 2.5 6S0 4.88 0 3.5 1.11 1 2.5 1s2.48 1.12 2.48 2.5zM.5 8h4V23h-4V8zM8.5 8h3.83v2.05h.05c.53-1 1.83-2.05 3.77-2.05C20.6 8 22 10.05 22 13.6V23h-4v-8.5c0-2-.04-4.6-2.8-4.6-2.8 0-3.23 2.2-3.23 4.45V23h-4V8z"/></svg></span>
+          linkedin.com/in/uppala-samhitha
+        </a>
+        <a href="https://github.com/samhitha-2107" target="_blank" rel="noopener" class="contact-row">
+          <span class="contact-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.73.5.5 5.73.5 12c0 5.09 3.29 9.4 7.86 10.93.57.1.79-.25.79-.55v-1.94c-3.2.7-3.87-1.54-3.87-1.54-.53-1.34-1.29-1.7-1.29-1.7-1.05-.72.08-.71.08-.71 1.17.08 1.78 1.2 1.78 1.2 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.68 0-1.25.45-2.28 1.19-3.08-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11.1 11.1 0 0 1 5.79 0c2.2-1.49 3.17-1.18 3.17-1.18.64 1.59.24 2.76.12 3.05.74.8 1.19 1.83 1.19 3.08 0 4.41-2.7 5.38-5.27 5.67.42.36.78 1.07.78 2.15v3.19c0 .31.21.66.8.55A11.5 11.5 0 0 0 23.5 12c0-6.27-5.23-11.5-11.5-11.5z"/></svg></span>
+          github.com/samhitha-2107 <span style="color:var(--paper-dim);font-size:11px;">— add repos here once public</span>
+        </a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="wrap">
+  <span>© 2026 Uppala Samhitha</span>
+  <span>Built with intent, not a template.</span>
+</footer>
+
+<script>
+  document.getElementById('navToggle').addEventListener('click', function(){
+    document.getElementById('navLinks').classList.toggle('open');
+  });
+  document.querySelectorAll('.navlinks a').forEach(a=>{
+    a.addEventListener('click', ()=> document.getElementById('navLinks').classList.remove('open'));
+  });
+</script>
 </body>
 </html>
